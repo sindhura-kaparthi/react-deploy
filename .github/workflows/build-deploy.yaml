@@ -5,20 +5,12 @@ on:
       - master
 
 jobs:
-  build:
-    name: Build and Deploy
+  Deploy-Contract:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node.js 16.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: "16.x"
-      - run: yarn install
-      - run: yarn build
-      - run: yarn deploy
-      - name: Upload Test reports to github pages
+      - uses: actions/checkout@v3
+      - name: Upload Test to github pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: ./build/
+          folder: ./test/
           target-folder: build-reports/${{ github.sha }}/${{ github.run_id }}/${{ github.run_attempt }}
